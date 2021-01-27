@@ -1,6 +1,7 @@
 //webpack.base.config.js 是webpack在不同环境的公共配置
 const path = require('path')
 const utils = require("./utils")
+// const px2rem = require("postcss-px2rem")
 module.exports = {
     // 入口
     entry: {
@@ -34,7 +35,43 @@ module.exports = {
                     },
                     {
                         loader: 'css-loader', //转换css
-                    }
+                        // options: {
+                        //     importLoaders: 1,
+                        // },
+                    },
+                    // {
+                    //     loader: 'px2rem-loader',
+                    //     options: {
+                    //         remUnit: 75,
+                    //         remPrecision: 8
+                    //     }
+                    // },
+                    // {
+                    //     loader:require.resolve('px2rem-loader'),
+                    //       options: {
+                    //         importLoaders:1,
+                    //           remUnit:76.8,//这里是因为给的设计图是按照768*1024pad的尺寸来的，因此设置啦这个单位，一般750手机设计图单位设置为75
+                    //           min:2
+                    //       },
+                    //   },
+                    //   {
+                    //     loader: require.resolve('postcss-loader'),
+                    //     options: {
+                    //       ident: 'postcss',
+                    //       plugins: () => [
+                    //         require('postcss-flexbugs-fixes'),
+                    //         autoprefixer({
+                    //           browsers: [
+                    //             '>1%',
+                    //             'last 4 versions',
+                    //             'Firefox ESR',
+                    //             'not ie < 9', // React doesn't support IE8 anyway
+                    //           ],
+                    //           flexbox: 'no-2009',
+                    //         }),
+                    //       ],
+                    //     },
+                    //   },
                 ]
             },
             {

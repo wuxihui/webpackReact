@@ -3,6 +3,46 @@ const webpackMerge = require("webpack-merge");
 const baseWebpackConfig = require("./webpack.base.config")
 const utils = require("./utils")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const px2rem = require("postcss-px2rem")
+
+const getStyleLoaders = (cssOptions, preProcessor) => {
+    const loaders = [
+      require.resolve('style-loader'),
+      {
+        loader: require.resolve('css-loader'),
+        options: cssOptions,
+      },
+      {
+        // Options for PostCSS as we reference these options twice
+        // Adds vendor prefixing based on your specified browser support in
+        // package.json
+        loader: require.resolve('postcss-loader'),
+        options: {
+          // Necessary for external CSS imports to work
+          // https://github.com/facebook/create-react-app/issues/2677
+          ident: 'postcss',
+          // 这些是配置rem的
+          plugins: () => [
+            require('postcss-flexbugs-fixes'),
+            require('postcss-preset-env')({
+              autoprefixer: {
+                flexbox: 'no-2009',
+              },
+              stage: 3,
+            }),
+            px2rem({remUnit: 75})  // 这里表示 75px = 1rem
+          ],
+        },
+      },
+      {
+        loader: require.resolve('less-loader') // compiles Less to CSS
+      }
+    ];
+    if (preProcessor) {
+      loaders.push(require.resolve(preProcessor));
+    }
+    return loaders;
+  };
 
 module.exports = webpackMerge(baseWebpackConfig,{
     // 指定构建环境  
