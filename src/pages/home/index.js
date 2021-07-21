@@ -2,17 +2,41 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import testImg from '../../../assets/img/test.jpg'
 import Nav from '../../component/Nav/index'
+import Head from '../../component/Header/index'
+import Movie from '../movie'
+import Mine from '../mine'
+import Search from '../search'
+import Video from '../video'
 import './index.less'
+import { 
+    // HashRouter as Router, 
+    Route, 
+    // BrowserRouter,
+    Switch
+  } from 'react-router-dom'
 
 export default class Home extends React.Component {
+    constructor (props) {
+        super(props)
+        this.state = {
+            headArr: [
+
+            ]
+        }
+    }
     render () {
         return (
-            <div className="test test2">
+            <div className="main-react-app">
+                <Head name="react-app"></Head>
+                <div className="main">
+                    <Switch>
+                        <Route path="/home/movie" component={Movie}></Route>
+                        <Route path="/home/search" component={Search}></Route>
+                        <Route path="/home/video" component={Video}></Route>
+                        <Route path="/home/mine" component={Mine}></Route>
+                    </Switch>
+                </div>
                 <Nav></Nav>
-                <input type="text" placeholder="进入一级路由搜索页面" />
-                <p className="testP">hello world</p>
-                <NavLink to="/user">二级路由</NavLink>
-                <img src={testImg} alt="" style={{width:360,height:60}}/>
             </div>
         )
     }
