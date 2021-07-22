@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom'
 import Loadable from 'react-loadable'
 import routers from './router/index'
+import { Button } from 'antd'
+import './App.css'
 
 export default class App extends Component{
   render () {
